@@ -1,5 +1,5 @@
 /**
- * eslint-disable @sap/ui5-jsdocs/no-jsdoc
+ * eslint-disable @sap/ui5-jsdocs/no-jsdoc yy
  */
 
 sap.ui.define([

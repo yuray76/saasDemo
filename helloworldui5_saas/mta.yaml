@@ -20,7 +20,7 @@ modules:
   parameters:
     routes:
       - route: https://${subdomain}-${appname}.${default-domain}
-      - route: https://saas-customer-k0l6j388-${appname}.${default-domain}
+      - route: https://${customer_subdomain}-${appname}.${default-domain}
     disk-quota: 256M
     memory: 256M
   properties:    
@@ -110,18 +110,18 @@ resources:
     service-name: sapbtphelloworldui5-destination-service
     service-plan: lite
 
-- name: sapbtphelloworldui5-connectivity
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: connectivity
-    service-plan: lite
-
 - name: sapbtphelloworldui5-repo-host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
     service-name: sapbtphelloworldui5-html5-srv
     service-plan: app-host
+
+- name: sapbtphelloworldui5-connectivity
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: connectivity
+    service-plan: lite
 
 - name: saas-registry
   type: org.cloudfoundry.managed-service
@@ -144,6 +144,7 @@ parameters:
   enable-parallel-deployments: true
   appname: sapbtphelloworldui5  
   subdomain: 574e1e10trial
+  customer_subdomain: saas-customer-k0l6j388
 
 build-parameters:
   before-all:
