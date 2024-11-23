@@ -25,6 +25,9 @@ modules:
     memory: 256M
   properties:    
     TENANT_HOST_PATTERN: "^(.*)-${appname}.${default-domain}" 
+    CJ_PROTECT_WHITELIST: '[{"protocol": "https","host":"*.ondemand.com"}]'
+    httpHeaders: '[{"Content-Security-Policy":"frame-ancestors https://*.ondemand.com;"},{"X-Frame-Options":"SAMEORIGIN"},{"Cache-control":"no-cache, no-store, must-revalidate"}]'
+
 
 - name: sapbtphelloworldui5-app-content
   type: com.sap.application.content

@@ -5,6 +5,7 @@
 2. Створити модул approuter.
 3. Змінити xs-app.json файл. 
 4. Добавити необхідні сервіси та налаштування в mta.yaml.
+5. Виконати налаштування для Work Zone.
 
 ## 1. Перестворення mta.yaml
 
@@ -210,3 +211,53 @@ build-parameters:
 
 Кінцева версія файлу `mta.yaml` повинна виглядати приблизно
 [так](helloworldui5_saas/mta.yaml)
+
+## 5. Налаштування для Work Zone
+
+Інформація взята з [блогу](https://community.sap.com/t5/technology-blogs-by-members/integrate-app-into-work-zone-from-a-different-subaccount/ba-p/13584425).
+
+5.1. Вносимо зміни в файл index.html. В розділ Head добавляємо код перед скриптом з `id="sap-ui-bootstrap"`
+```properties
+<script> 
+    window["sap-ui-config"] = { 
+        allowlistService: '/allowlist/service', 
+        frameOptions: 'trusted', 
+        frameOptionsConfig: { 
+            callback: function (bSuccess) { 
+	        if (bSuccess) { 
+	            console.log("App is allowed to run!"); 
+	        } else { 
+	            console.error("App is not allowed to run!"); 
+	        } 
+            } 
+        } 
+    }; 
+</script>
+```
+
+5.2. Змінюємо файл `xs-app.json`, який знаходиться в папці approuter (в нашому прикладі це `sapbtphelloworldui5-approuter`). 
+Після параметру
+```properties
+"welcomeFile": "/sapbtphelloworldui5"
+```
+добавляємо
+```properties
+"whitelistService": {
+    "endpoint": "/allowlist/service"
+  }
+```
+5.3. Змінюємо файл `mta.yaml`. В модулі типу `approuter.nodejs` в розділ `properties` добавляємо до існуючих параметрів наступні
+```properties
+CJ_PROTECT_WHITELIST: '[{"protocol": "https","host":"*.ondemand.com"}]'
+httpHeaders: '[{"Content-Security-Policy":"frame-ancestors https://*.ondemand.com;"},{"X-Frame-Options":"SAMEORIGIN"},{"Cache-control":"no-cache, no-store, must-revalidate"}]'
+```
+
+Ці параметри необхідні не тільки для Work Zone, а і для відключення кешування.
+
+5.4. В субакаунті, в якому є підписка на SaaS, в розділі `Security->Settings` добавляємо маску `https://*.ondemand.com` як трастовий домен.
+
+![Trusted Domain](./screens/08.png)
+
+5.5. В Work Zone створюємо аплікацію з зовнішнім посиланням. 
+
+В результаті плитка має відкритися як нативний для Work Zone застосунок (iFrame).
