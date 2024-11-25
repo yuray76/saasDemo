@@ -8,7 +8,7 @@ modules:
   path: sapbtphelloworldui5-approuter
   requires:
   - name: sapbtphelloworldui5_html_repo_runtime
-  - name: uaa_sapbtphelloworldui5
+  - name: sapbtphelloworldui5_uaa
   - name: sapbtphelloworldui5-destination-service
     group: destinations
     properties:
@@ -56,7 +56,7 @@ modules:
     supported-platforms: []
 
 resources:
-- name: uaa_sapbtphelloworldui5
+- name: sapbtphelloworldui5_uaa
   type: org.cloudfoundry.managed-service
   parameters:    
     config:
@@ -146,7 +146,7 @@ parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
   appname: sapbtphelloworldui5  
-  subdomain: 574e1e10trial
+  subdomain: 6238a3a1trial
   customer_subdomain: saas-customer-k0l6j388
 
 build-parameters:
