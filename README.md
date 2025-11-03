@@ -21,7 +21,7 @@
 
 1.3. Обираємо параметри, як показано на скріні.
 
-![Add Deploy Config](./screens/031.png)
+![Add Deploy Config](./screens/03.png)
 
 > **Важливо**: Add application to managed application router необхідно виставити в No.
 
