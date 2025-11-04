@@ -25,11 +25,10 @@
 
 ![Add Deploy Config](./screens/02.png)
 
-1.3. Обираємо параметри, як показано на скріні.
+1.3. Обираємо параметри, як показано на скріні, та тиснемо Finish.
 
 ![Add Deploy Config](./screens/03.png)
 
-> **Важливо**: Add application to managed application router необхідно виставити в No.
 
 В результаті виконання попереднього пункту у нас сформувався новий mta.yaml. 
 
