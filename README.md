@@ -173,15 +173,7 @@
 
 4.6. Ресурси з назвою `sapbtphelloworldui5_html_repo_runtime`, `sapbtphelloworldui5-destination-service` та `sapbtphelloworldui5-repo-host` лишаємо без змін.
 
-4.7. Добавляємо ресурс з назвою `sapbtphelloworldui5-connectivity`
-```properties
-- name: sapbtphelloworldui5-connectivity
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: connectivity
-    service-plan: lite
-```
-4.8.  Добавляємо ресурс з назвою `saas-registry`
+4.7.  Добавляємо ресурс з назвою `saas-registry`
 ```properties
 - name: saas-registry
   type: org.cloudfoundry.managed-service
@@ -199,7 +191,7 @@
         onSubscription: https://${subdomain}-${appname}.${default-domain}/callback/v1.0/tenants/{tenantId}        
         getDependencies: https://${subdomain}-${appname}.${default-domain}/callback/v1.0/dependencies
 ```
-4.9. Добавляємо параметри, які використовуються в налаштуваннях модулів та ресурсів
+4.8. Добавляємо параметри, які використовуються в налаштуваннях модулів та ресурсів
 ```properties
   appname: sapbtphelloworldui5  
   subdomain: 574e1e10trial
@@ -207,7 +199,7 @@
 ```
 > **Важливо**: Значення параметрів є індивідуальними для окремих проєктів.
 
-4.10. Добавляємо `build-parameters` в кінець файлу
+4.9. Добавляємо `build-parameters` в кінець файлу
 ```properties
 build-parameters:
   before-all:
