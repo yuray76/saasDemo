@@ -92,7 +92,6 @@
       forwardAuthToken: true
       name: ui5
       url: https://ui5.sap.com
-  - name: sapbtphelloworldui5-connectivity
   - name: saas-registry
   parameters:
     routes:
