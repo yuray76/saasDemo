@@ -168,6 +168,9 @@
     service: xsuaa
     service-plan: application  
 ```
+
+> **Важливо**: redirect-uris: [https://*.cfapps.us10-001.hana.ondemand.com/**] використовується лише для US East (VA) - AWS (us10) регіону, в якому в коді є суфікс, наприклад -001. Для Singapore - Azure oauth2-configuration можна видалити, або змінити us10-001 на ap21. 
+
 4.6. Ресурси з назвою `sapbtphelloworldui5_html_repo_runtime`, `sapbtphelloworldui5-destination-service` та `sapbtphelloworldui5-repo-host` лишаємо без змін.
 
 4.7. Добавляємо ресурс з назвою `sapbtphelloworldui5-connectivity`
