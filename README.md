@@ -27,7 +27,9 @@
 
 1.3. Обираємо параметри, як показано на скріні, та тиснемо Finish.
 
-![Add Deploy Config](./screens/03.png)
+<p align="center">
+    <img src="./screens/03.png" width="600">
+</p>
 
 
 В результаті виконання попереднього пункту у нас сформувався новий mta.yaml. 
