@@ -21,7 +21,9 @@
 
 1.3. Відкриваємо "Application Info" за допомогою контекстного меню по проекту та запускаємо Add Deploy Config.
 
-![Application Info](./screens/01.png)
+<p align="center">
+    <img src="./screens/01.png" width="600">
+</p>
 
 ![Add Deploy Config](./screens/02.png)
 
