@@ -12,7 +12,7 @@
 Якщо додаток розгорнутий у субакаунті, то потрібно перейти в Application Info та виконати Undeploy
 
 <p align="center">
-    <img src="./screens/00.png" width="400">
+    <img src="./screens/00.png" width="500">
 </p>
 
 ## 1. Перестворення mta.yaml
