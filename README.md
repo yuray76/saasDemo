@@ -27,7 +27,9 @@
     <img src="./screens/01.png" width="600">
 </p>
 
-![Add Deploy Config](./screens/02.png)
+<p align="center">
+    <img src="./screens/02.png" width="600">
+</p>
 
 1.3. Обираємо параметри, як показано на скріні, та тиснемо Finish.
 
