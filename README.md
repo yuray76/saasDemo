@@ -48,7 +48,7 @@
 
 2.2. Обираємо шаблон Approuter Configuration 
 
-<p align="center">
+<p align="left">
     <img src="./screens/05.png" width="600">
 </p>
 
