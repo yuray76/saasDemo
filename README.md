@@ -48,6 +48,10 @@
 
 2.2. Обираємо шаблон Approuter Configuration 
 
+<p align="center">
+    <img src="./screens/05.png" width="600">
+</p>
+
 2.3. На наступному кроці обираємо "do not overwrite" та "Finish"
 
 ![Standalone Approuter](./screens/06.png)
