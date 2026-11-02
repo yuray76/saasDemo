@@ -11,7 +11,9 @@
 ## 0. Undeploy звичайного SAPUI5 застосунку
 Якщо додаток розгорнутий у субакаунті, то потрібно перейти в Application Info та виконати Undeploy
 
-![Application Info](./screens/00.png)
+<p align="center">
+    <img src="./screens/00.png" width="400">
+</p>
 
 ## 1. Перестворення mta.yaml
 
