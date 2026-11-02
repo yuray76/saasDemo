@@ -28,7 +28,7 @@
 </p>
 
 <p align="center">
-    <img src="./screens/02.png" width="600">
+    <img src="./screens/02.png" width="700">
 </p>
 
 1.3. Обираємо параметри, як показано на скріні, та тиснемо Finish.
