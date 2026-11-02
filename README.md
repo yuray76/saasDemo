@@ -46,11 +46,9 @@
 
 ![Add Deploy Config](./screens/04.png)
 
-2.2. Обираємо шаблон Approuter Configuration, обираємо Standalone Approuter. 
+2.2. Обираємо шаблон Approuter Configuration 
 
-![Standalone Approuter](./screens/05.png)
-
-2.3. На наступному кроці вибираємо "do not overwrite"
+2.3. На наступному кроці обираємо "do not overwrite" та "Finish"
 
 ![Standalone Approuter](./screens/06.png)
 
