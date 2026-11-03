@@ -490,5 +490,11 @@ provider_rt
     <img src="./screens/24.png" width="600">
 </p>
 
+5.12. Надаємо колекцію ролей `~provider_wz_helloworld_role` бізнес-користувачу.
+
+<p align="left">
+    <img src="./screens/25.png" width="600">
+</p>
+
 
 В результаті плитка має відкритися як нативний для Work Zone застосунок (iFrame).
