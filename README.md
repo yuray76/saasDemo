@@ -463,10 +463,32 @@ provider_rt
     <img src="./screens/19.png" width="600">
 </p>
 
-5.8. В субакаунті Consumer підписуємося на сервіс Work Zone, Standard edition. Додаткові сервіси для субакаунта додаються в `Entitlements`.
+5.8. В субакаунті Consumer підписуємося на сервіс `Work Zone, Standard edition`. Додаткові сервіси для субакаунта додаються в `Entitlements`.
 
 <p align="left">
     <img src="./screens/20.png" width="600">
 </p>
+
+5.9. Переходимо до адміністративну консоль `Work Zone, Standard edition` (не забуваємо надати колекцію ролей `Launchpad_Admin` для вашого бізнес користувача).
+5.10. Створюємо сайт та переходимо в меню `Channel Manager`, де створюємо канал контенту
+
+<p align="left">
+    <img src="./screens/21.png" width="600">
+</p>
+
+<p align="left">
+    <img src="./screens/22.png" width="600">
+</p>
+
+5.11. Переходимо до налаштування сайту та активовуємо нову роль, зберігаємо зміни.
+
+<p align="left">
+    <img src="./screens/23.png" width="600">
+</p>
+
+<p align="left">
+    <img src="./screens/24.png" width="600">
+</p>
+
 
 В результаті плитка має відкритися як нативний для Work Zone застосунок (iFrame).
