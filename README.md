@@ -401,10 +401,16 @@ build-parameters:
 ]
 ```
 
-> **Важливо**: В цьому файлі значення параметрів `"appId"` та `"vizId"` беремо з файлу `manifest.json` з секції `"crossNavigation"`.
+> **Важливо**: В цьому файлі значення параметрів `"appId"` та `"vizId"` беремо з файлу `manifest.json` з секції `"crossNavigation"`. 
 
 <p align="left">
     <img src="./screens/09.png" width="600">
+</p>
+
+> **Важливо**: Якщо цієї секції немає, необхідно в конфігурації проєкту виконати `Add for SAP Fiori Launchpad`
+
+<p align="left">
+    <img src="./screens/10.png" width="600">
 </p>
 
 
