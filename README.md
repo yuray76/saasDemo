@@ -459,7 +459,14 @@ provider_rt
 
 Змінюємо та зберігаємо `Destination` `provider_cdm`
 
+<p align="left">
+    <img src="./screens/19.png" width="600">
+</p>
+
 5.8. В субакаунті Consumer підписуємося на сервіс Work Zone, Standard edition. Додаткові сервіси для субакаунта додаються в `Entitlements`.
 
+<p align="left">
+    <img src="./screens/20.png" width="600">
+</p>
 
 В результаті плитка має відкритися як нативний для Work Zone застосунок (iFrame).
