@@ -434,7 +434,7 @@ provider_rt
     <img src="./screens/13.png" width="600">
 </p>
 
-5.6. Імпортуємо ці `Destinations` в субакаунти споживачів
+5.6. Імпортуємо ці `Destinations` в субакаунт споживача
 <p align="left">
     <img src="./screens/14.png" width="600">
 </p>
@@ -443,6 +443,20 @@ provider_rt
     <img src="./screens/15.png" width="600">
 </p>
 
+5.7. Правимо `Client ID`, `Client Secret`, `xsappname` для `Destination` `provider_cdm`. Ці параметри беремо з субакаунта провайдера. Знаходимо сервіс sapbtphelloworldui5-app-rt-service з технічним іменем html5-apps-repo та відкриваємо сервісний ключ sapbtphelloworldui5-app-rt-key
+
+<p align="left">
+    <img src="./screens/17.png" width="600">
+</p>
+
+<p align="left">
+    <img src="./screens/18.png" width="600">
+</p>
+
+Змінюємо та зберігаємо `Destination` `provider_cdm`
+<p align="left">
+    <img src="./screens/16.png" width="600">
+</p>
 
 
 В результаті плитка має відкритися як нативний для Work Zone застосунок (iFrame).
