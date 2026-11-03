@@ -163,7 +163,7 @@
         - Name: provider_cdm
           ServiceInstanceName: sapbtphelloworldui5-app-rt-service
           ServiceKeyName: sapbtphelloworldui5-app-rt-key
-          URL: https://html5-apps-repo-rt.cfapps.eu10.hana.ondemand.com/applications/cdm/kpi_helloworld
+          URL: https://html5-apps-repo-rt.cfapps.us10.hana.ondemand.com/applications/cdm/kpi_helloworld
         existing_destinations_policy: ignore
   build-parameters:
     no-source: true
@@ -218,7 +218,7 @@
       xsappname: ${appname}
       oauth2-configuration: 
         redirect-uris:
-          - https://*.cfapps.eu10-004.hana.ondemand.com/**
+          - https://*.cfapps.us10-001.hana.ondemand.com/**
       scopes:     
         - name: $XSAPPNAME.Callback
           description: With this scope set, the callbacks for tenant onboarding, offboarding and getDependencies can be called.        
@@ -263,7 +263,7 @@
             CEP.HTML5contentprovider: true
             HTML5.DynamicDestination: true
             HTML5.ForwardAuthToken: true
-            URL: https://${subdomain}.launchpad.cfapps.eu10.hana.ondemand.com/
+            URL: https://${customer_subdomain}.launchpad.cfapps.us10.hana.ondemand.com/
           existing_destinations_policy: ignore
       version: 1.0.0
     service: destination
