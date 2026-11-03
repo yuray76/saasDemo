@@ -419,7 +419,7 @@ build-parameters:
 5.4. В субакаунті Consumer підписуємося на сервіс
 
 <p align="left">
-    <img src="./screens/10.png" width="600">
+    <img src="./screens/11.png" width="600">
 </p>
 
 5.5. В Work Zone створюємо аплікацію з зовнішнім посиланням. 
