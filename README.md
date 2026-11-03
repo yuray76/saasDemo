@@ -446,6 +446,10 @@ provider_rt
 5.7. Правимо `Client ID`, `Client Secret`, `xsappname` для `Destination` `provider_cdm`. Ці параметри беремо з субакаунта провайдера. Знаходимо сервіс sapbtphelloworldui5-app-rt-service з технічним іменем html5-apps-repo та відкриваємо сервісний ключ sapbtphelloworldui5-app-rt-key
 
 <p align="left">
+    <img src="./screens/16.png" width="600">
+</p>
+
+<p align="left">
     <img src="./screens/17.png" width="600">
 </p>
 
@@ -454,9 +458,8 @@ provider_rt
 </p>
 
 Змінюємо та зберігаємо `Destination` `provider_cdm`
-<p align="left">
-    <img src="./screens/16.png" width="600">
-</p>
+
+5.8. В субакаунті Consumer підписуємося на сервіс Work Zone, Standard edition. Додаткові сервіси для субакаунта додаються в `Entitlements`.
 
 
 В результаті плитка має відкритися як нативний для Work Zone застосунок (iFrame).
