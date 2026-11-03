@@ -56,7 +56,7 @@
 
 ![Standalone Approuter](./screens/06.png)
 
-## 3. Створюємо в корені проєкту каталог sapbtphelloworldui5-approuter та додаємо xs-app.json та package.json файли. 
+## 3. Створюємо в корені проєкту каталог sapbtphelloworldui5-approuter та додаємо необхідні файли. 
 
 3.1. Файл xs-app.json
 
@@ -82,6 +82,7 @@
 }
 ```
 3.2. Файл package.json
+
 ./sapbtphelloworldui5-approuter/package.json
 ```properties
 {
@@ -103,7 +104,7 @@
 }
 ```
 
-> **Важливо**: В проекті є два файли `xs-app.json`. Правимо той, який знаходиться в папці роута (в прикладі це sapbtphelloworldui5-approuter)
+> **Важливо**: В проекті є два файли `xs-app.json`. Працюємо з тим, який знаходиться в папці роута (в прикладі це sapbtphelloworldui5-approuter)
 
 ## 4. Добавляємо необхідні сервіси та налаштування в mta.yaml.
 
