@@ -403,7 +403,7 @@ build-parameters:
 
 > **Важливо**: В цьому файлі значення параметрів `"appId"` та `"vizId"` беремо з файлу `manifest.json`.
 
-"appId" з "sap.app.id"
+"appId" з `"sap.app.id"`
 <p align="left">
     <img src="./screens/27.png" width="600">
 </p>
