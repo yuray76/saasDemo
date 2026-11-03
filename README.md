@@ -113,12 +113,13 @@
 4.1. Налаштовуємо модуль типу `approuter.nodejs`
 
 ```properties
+# App router ###########################################################
 - name: sapbtphelloworldui5-approuter
   type: approuter.nodejs
   path: sapbtphelloworldui5-approuter
   requires:
-  - name: sapbtphelloworldui5_html_repo_runtime
-  - name: sapbtphelloworldui5_uaa
+  - name: sapbtphelloworldui5-html-repo-runtime
+  - name: sapbtphelloworldui5-uaa
   - name: sapbtphelloworldui5-destination-service
     group: destinations
     properties:
@@ -134,23 +135,39 @@
     memory: 256M
   properties:    
     TENANT_HOST_PATTERN: "^(.*)-${appname}.${default-domain}"
+    CJ_PROTECT_WHITELIST: '[{"protocol": "https","host":"*.ondemand.com"}]' 
+    httpHeaders: '[{"Content-Security-Policy":"frame-ancestors https://*.ondemand.com;"},{"X-Frame-Options":"SAMEORIGIN"},{"Cache-control":"no-cache, no-store, must-revalidate"}]'
+########################################################################
 ```
-4.2. Модуль типу `com.sap.application.content` залишаємо без змін.
+4.2. Модуль типу `com.sap.application.content`
 ```properties
-- name: sapbtphelloworldui5-app-content
+# Destination deployer module - create CDM DT destination ##########
+- name: sapbtphelloworldui5-destination-content
   type: com.sap.application.content
-  path: .
   requires:
-  - name: sapbtphelloworldui5-repo-host
+  - name: sapbtphelloworldui5-destination-service
     parameters:
       content-target: true
+  - name: sapbtphelloworldui5-html5-repo-runtime
+    parameters:
+      service-key:
+        name: sapbtphelloworldui5-app-rt-key
+  - name: sapbtphelloworldui5-uaa
+    parameters:
+      service-key:
+        name: sapbtphelloworldui5-uaa-key
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: provider_cdm
+          ServiceInstanceName: sapbtphelloworldui5-app-rt-service
+          ServiceKeyName: sapbtphelloworldui5-app-rt-key
+          URL: https://html5-apps-repo-rt.cfapps.eu10.hana.ondemand.com/applications/cdm/kpi_helloworld
+        existing_destinations_policy: ignore
   build-parameters:
-    build-result: resources
-    requires:
-    - artifacts:
-      - sapbtphelloworldui5.zip
-      name: sapbtphelloworldui5
-      target-path: resources/
+    no-source: true
+#######################################################################  
 ```
 4.3. Модуль типу `html5` залишаємо без змін.
 ```properties
@@ -165,48 +182,96 @@
     - npm run build:cf
     supported-platforms: []
 ```
-4.4. Зайві модулі видаляємо. Наприклад, модуль типу `com.sap.application.content`
-
-4.5. Переходимо до налаштувань ресурсів. Перший ресурс має назву `uaa_sapbtphelloworldui5`. Його варто перейменувати в `sapbtphelloworldui5_uaa` та налаштувати наступним чином.
+4.4. Змінюємо модуль `sapbtphelloworldui5-app-content` типу `com.sap.application.content`
 ```properties
-- name: sapbtphelloworldui5_uaa
+# HTML5 app deployer module - store xsuaa, backend destinations #######
+- name: sapbtphelloworldui5-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: sapbtphelloworldui5-uaa  
+  - name: sapbtphelloworldui5-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - sapbtphelloworldui5.zip
+      name: sapbtphelloworldui5
+      target-path: resources/
+  parameters:
+    config:
+      destinations:
+      - name: ui5
+        url: https://ui5.sap.com
+########################################################################
+```
+
+4.5. Переходимо до налаштувань ресурсів. Перший ресурс має назву `sapbtphelloworldui5-auth`. Його варто перейменувати в `sapbtphelloworldui5-uaa` та налаштувати наступним чином.
+```properties
+- name: sapbtphelloworldui5-uaa
   type: org.cloudfoundry.managed-service
-  parameters:    
+  parameters:
     config:
       tenant-mode: shared
       xsappname: ${appname}
       oauth2-configuration: 
-        redirect-uris: [https://*.cfapps.us10-001.hana.ondemand.com/**]
-      scopes:
-        - name: $XSAPPNAME.Read
-          description: Read permission
-        - name: $XSAPPNAME.Write
-          description: Write permission
+        redirect-uris:
+          - https://*.cfapps.eu10-004.hana.ondemand.com/**
+      scopes:     
         - name: $XSAPPNAME.Callback
-          description: With this scope set, the callbacks for tenant onboarding, offboarding and getDependencies can be called.
+          description: With this scope set, the callbacks for tenant onboarding, offboarding and getDependencies can be called.        
           grant-as-authority-to-apps:
             - $XSAPPNAME(application,sap-provisioning,tenant-onboarding)
       foreign-scope-references:
         - uaa.user
-      role-templates:
-        - name: Reader
-          description: Can read
-          scope-references:
-            - $XSAPPNAME.Read
-        - name: Author
-          description: Can read and write
-          scope-references:
-            - $XSAPPNAME.Read
-            - $XSAPPNAME.Write      
     service: xsuaa
-    service-plan: application  
+    service-name: sapbtphelloworldui5-xsuaa-service
+    service-plan: application
 ```
 
 > **Важливо**: redirect-uris: [https://*.cfapps.us10-001.hana.ondemand.com/**] використовується лише для US East (VA) - AWS (us10) регіону, в якому в коді є суфікс, наприклад -001. Для Singapore - Azure oauth2-configuration можна видалити, або змінити us10-001 на ap21. 
 
-4.6. Ресурси з назвою `sapbtphelloworldui5_html_repo_runtime`, `sapbtphelloworldui5-destination-service` та `sapbtphelloworldui5-repo-host` лишаємо без змін.
+4.6. Добавляємо ресурс з назвою `sapbtphelloworldui5-html5-repo-runtime`
+```properties
+# HTML5 app-runtime resource for CDM DT destination ######################
+- name: sapbtphelloworldui5-html5-repo-runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: sapbtphelloworldui5-app-rt-service
+    service-plan: app-runtime
+##########################################################################
+```
+4.7. Ресурс з назвою `sapbtphelloworldui5-repo-host` лишаємо без змін.
 
-4.7.  Добавляємо ресурс з назвою `saas-registry`
+4.8. Добавляємо ресурс з назвою `sapbtphelloworldui5-destination-service`
+```properties
+- name: sapbtphelloworldui5-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        subaccount:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: provider-rt
+            ProxyType: Internet
+            Type: HTTP
+            CEP.HTML5contentprovider: true
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            URL: https://${subdomain}.launchpad.cfapps.eu10.hana.ondemand.com/
+          existing_destinations_policy: ignore
+      version: 1.0.0
+    service: destination
+    service-name: sapbtphelloworldui5-destination-service
+    service-plan: lite
+```
+
+4.9.  Добавляємо ресурс з назвою `saas-registry`
 ```properties
 - name: saas-registry
   type: org.cloudfoundry.managed-service
@@ -224,21 +289,23 @@
         onSubscription: https://${subdomain}-${appname}.${default-domain}/callback/v1.0/tenants/{tenantId}        
         getDependencies: https://${subdomain}-${appname}.${default-domain}/callback/v1.0/dependencies
 ```
-4.8. Добавляємо параметри, які використовуються в налаштуваннях модулів та ресурсів
+4.10. Добавляємо параметри, які використовуються в налаштуваннях модулів та ресурсів
 ```properties
   appname: sapbtphelloworldui5  
-  subdomain: 574e1e10trial
-  customer_subdomain: saas-customer-k0l6j388
+  subdomain: fcdc23fetrial
+  customer_subdomain: customer1-xbdyysmv
 ```
 > **Важливо**: Значення параметрів є індивідуальними для окремих проєктів.
 
-4.9. Добавляємо `build-parameters` в кінець файлу
+4.11. Добавляємо `build-parameters` в кінець файлу
 ```properties
 build-parameters:
   before-all:
   - builder: custom
     commands:
     - npm install
+	- mkdir -p resources 
+    - cp workzone/cdm.json resources/cdm.json  
 ```
 
 Кінцева версія файлу `mta.yaml` повинна виглядати приблизно
@@ -246,38 +313,101 @@ build-parameters:
 
 ## 5. Налаштування для Work Zone
 
-Інформація взята з [блогу](https://community.sap.com/t5/technology-blogs-by-members/integrate-app-into-work-zone-from-a-different-subaccount/ba-p/13584425).
-
-5.1. Вносимо зміни в файл index.html. В розділ Head добавляємо код перед скриптом з `id="sap-ui-bootstrap"`
+5.1. Вносимо зміни в файл ./webapp/manifest.json. Змінюємо параметр `sap.cloud.service="kpi_helloworld"`
 ```properties
-<script> 
-    window["sap-ui-config"] = { 
-        allowlistService: '/allowlist/service', 
-        frameOptions: 'trusted', 
-        frameOptionsConfig: { 
-            callback: function (bSuccess) { 
-	        if (bSuccess) { 
-	            console.log("App is allowed to run!"); 
-	        } else { 
-	            console.error("App is not allowed to run!"); 
-	        } 
-            } 
-        } 
-    }; 
-</script>
-```
-
-5.2. Змінюємо файл `xs-app.json`, який знаходиться в папці approuter (в нашому прикладі це `sapbtphelloworldui5-approuter`). 
-Після параметру
-```properties
-"welcomeFile": "/sapbtphelloworldui5"
-```
-добавляємо
-```properties
-"whitelistService": {
-    "endpoint": "/allowlist/service"
+ "sap.cloud": {
+    "public": true,
+    "service": "kpi_helloworld"
   }
 ```
+
+5.2. В корені проєкту створюємо папку `workzone` та розміщуємо там файл `cdm.json` з таким вмістом  
+```properties
+[
+  {
+    "_version": "3.0",
+    "identification": {
+      "id": "wz_helloworld_catalog",
+      "title": "Provider: тестові програми",
+      "entityType": "catalog"
+    },
+    "payload": {
+      "viz": [
+        {
+          "appId": "semanticobjecthelloworld",
+          "vizId": "semanticobjecthelloworld-show"
+        }
+      ]
+    },
+    "texts": [
+      {
+        "locale": "",
+        "textDictionary": {
+          "title": "Provider: тестові програми"
+        }
+      }
+    ]
+  },
+  {
+    "_version": "3.0",
+    "identification": {
+      "id": "wz_helloworld_group",
+      "title": "Provider: тестові програми",
+      "entityType": "group"
+    },
+    "payload": {
+      "viz": [
+        {
+          "appId": "semanticobjecthelloworld",
+          "vizId": "semanticobjecthelloworld-show"
+        }
+      ]
+    },
+    "texts": [
+      {
+        "locale": "",
+        "textDictionary": {
+          "title": "Provider: тестові програми"
+        }
+      }
+    ]
+  },
+  {
+    "_version": "3.0",
+    "identification": {
+      "id": "wz_helloworld_role",
+      "title": "Користувач тестових програм",
+      "description": "Набір тестових плиток",
+      "entityType": "role"
+    },
+    "payload": {
+      "apps": [
+        {
+          "id": "semanticobjecthelloworld"
+        }
+      ],
+      "catalogs": [
+        {
+          "id": "wz_helloworld_catalog"
+        }
+      ],
+      "groups": [
+        {
+          "id": "wz_helloworld_catalog"
+        }
+      ]
+    }
+  }
+]
+```
+
+> **Важливо**: В цьому файлі значення параметрів `"appId"` та `"vizId"` беремо з файлу `manifest.json` з секції `"crossNavigation"`.
+
+<p align="left">
+    <img src="./screens/09.png" width="600">
+</p>
+
+
 5.3. Змінюємо файл `mta.yaml`. В модулі типу `approuter.nodejs` в розділ `properties` добавляємо до існуючих параметрів наступні
 ```properties
 CJ_PROTECT_WHITELIST: '[{"protocol": "https","host":"*.ondemand.com"}]'
