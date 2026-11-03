@@ -414,17 +414,13 @@ build-parameters:
 </p>
 
 
-5.3. Змінюємо файл `mta.yaml`. В модулі типу `approuter.nodejs` в розділ `properties` добавляємо до існуючих параметрів наступні
-```properties
-CJ_PROTECT_WHITELIST: '[{"protocol": "https","host":"*.ondemand.com"}]'
-httpHeaders: '[{"Content-Security-Policy":"frame-ancestors https://*.ondemand.com;"},{"X-Frame-Options":"SAMEORIGIN"},{"Cache-control":"no-cache, no-store, must-revalidate"}]'
-```
+5.3. Виконуємо Build та Deploy програми. Перед цим потрібно автентифікуватися в субакаунті провайдера, де розгорнуті ресурси Cloud Foundry Runtime.
 
-Ці параметри необхідні не тільки для Work Zone, а і для відключення кешування.
+5.4. В субакаунті Consumer підписуємося на сервіс
 
-5.4. В субакаунті, в якому є підписка на SaaS, в розділі `Security->Settings` добавляємо маску `https://*.ondemand.com` як трастовий домен.
-
-![Trusted Domain](./screens/08.png)
+<p align="left">
+    <img src="./screens/10.png" width="600">
+</p>
 
 5.5. В Work Zone створюємо аплікацію з зовнішнім посиланням. 
 
