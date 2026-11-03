@@ -56,9 +56,9 @@
 
 ![Standalone Approuter](./screens/06.png)
 
-## 3. Змінюємо xs-app.json файл. 
+## 3. Створюємо в корені проєкту каталог sapbtphelloworldui5-approuter та додаємо xs-app.json та package.json файли. 
 
-3.1. Необхідно змінити метод аунтифікації та прописати роути, як показано в коді нижче
+3.1. Файл xs-app.json
 
 ./sapbtphelloworldui5-approuter/xs-app.json
 ```properties
@@ -81,6 +81,28 @@
   "welcomeFile": "/sapbtphelloworldui5"
 }
 ```
+3.2. Файл package.json
+./sapbtphelloworldui5-approuter/package.json
+```properties
+{
+	"name": "approuter",
+	"description": "Node.js based application router service for html5-apps",
+	"engines": {
+		"node": ">20"
+	},
+	"dependencies": {
+		"@sap/approuter": "14.4.2"
+	},
+	"devDependencies": {
+		"@sap/html5-repo-mock": "2.1.5"
+	},
+	"scripts": {
+		"start": "node node_modules/@sap/approuter/approuter.js",
+		"start-local": "node node_modules/@sap/html5-repo-mock/index.js"
+	}
+}
+```
+
 > **Важливо**: В проекті є два файли `xs-app.json`. Правимо той, який знаходиться в папці роута (в прикладі це sapbtphelloworldui5-approuter)
 
 ## 4. Добавляємо необхідні сервіси та налаштування в mta.yaml.
