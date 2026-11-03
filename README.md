@@ -434,5 +434,15 @@ provider_rt
     <img src="./screens/13.png" width="600">
 </p>
 
+5.6. Імпортуємо ці `Destinations` в субакаунти споживачів
+<p align="left">
+    <img src="./screens/14.png" width="600">
+</p>
+
+<p align="left">
+    <img src="./screens/15.png" width="600">
+</p>
+
+
 
 В результаті плитка має відкритися як нативний для Work Zone застосунок (iFrame).
