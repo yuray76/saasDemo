@@ -334,7 +334,7 @@ build-parameters:
     "payload": {
       "viz": [
         {
-          "appId": "semanticobjecthelloworld",
+          "appId": "sap.btp.helloworldui5",
           "vizId": "semanticobjecthelloworld-show"
         }
       ]
@@ -358,7 +358,7 @@ build-parameters:
     "payload": {
       "viz": [
         {
-          "appId": "semanticobjecthelloworld",
+          "appId": "sap.btp.helloworldui5",
           "vizId": "semanticobjecthelloworld-show"
         }
       ]
@@ -383,7 +383,7 @@ build-parameters:
     "payload": {
       "apps": [
         {
-          "id": "semanticobjecthelloworld"
+          "id": "sap.btp.helloworldui5"
         }
       ],
       "catalogs": [
@@ -393,7 +393,7 @@ build-parameters:
       ],
       "groups": [
         {
-          "id": "wz_helloworld_catalog"
+          "id": "wz_helloworld_group"
         }
       ]
     }
@@ -401,7 +401,14 @@ build-parameters:
 ]
 ```
 
-> **Важливо**: В цьому файлі значення параметрів `"appId"` та `"vizId"` беремо з файлу `manifest.json` з секції `"crossNavigation"`. 
+> **Важливо**: В цьому файлі значення параметрів `"appId"` та `"vizId"` беремо з файлу `manifest.json`.
+
+"appId" з "sap.app.id"
+<p align="left">
+    <img src="./screens/27.png" width="600">
+</p>
+
+"vizId" з секції `"crossNavigation"`: 
 
 <p align="left">
     <img src="./screens/09.png" width="600">
