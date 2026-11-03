@@ -422,6 +422,17 @@ build-parameters:
     <img src="./screens/11.png" width="600">
 </p>
 
-5.5. В Work Zone створюємо аплікацію з зовнішнім посиланням. 
+5.5. В субакаунті експортуємо два створені `Destinations`:
+
+provider_cdm
+<p align="left">
+    <img src="./screens/12.png" width="600">
+</p>
+
+provider_rt
+<p align="left">
+    <img src="./screens/13.png" width="600">
+</p>
+
 
 В результаті плитка має відкритися як нативний для Work Zone застосунок (iFrame).
